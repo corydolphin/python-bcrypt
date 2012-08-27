@@ -1,7 +1,7 @@
 Python bcrypt
 ============
 
-This repository is a clone of the Google Code project, which has not been updated in more than a year.
+This repository is a clone of the [Google Code project](http://code.google.com/p/py-bcrypt/), which has not been updated in more than a year.
 
 Most significantly, this clone applies a number of patches which allows compilation on Windows
 and improves a number of small details in the original implementation, as supplied by the community. The original authors whose patches are included in this author are:
