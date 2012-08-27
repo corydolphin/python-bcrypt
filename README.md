@@ -6,13 +6,16 @@ This repository is a clone of the Google Code project, which has not been update
 Most significantly, this clone applies a number of patches which allows compilation on Windows
 and improves a number of small details in the original implementation, as supplied by the community. The original authors whose patches are included in this author are:
 
-benghattem@gmail.com [Fixing compilation flags and ifdefs](http://code.google.com/p/py-bcrypt/issues/attachmentText?id=1&aid=10003000&name=py-bcrypt_11.patch&token=EFCIp9qVR4pi3SaJ7kDaVmy3OQc%3A1346047268712)
-florian.ruechel@gmail.com [Extending patch and fiing memset + bzero ](http://code.google.com/p/py-bcrypt/issues/attachmentText?id=1&aid=10008000&name=py-bcrypt.patch&token=esLPoSRqwBo90FHQ2B_NOyZbtas%3A1346047268714)
+benghattem@gmail.com
+Providing the basis for this patch, fixing compilation flags and ifdefs [patch](http://code.google.com/p/py-bcrypt/issues/attachmentText?id=1&aid=10003000&name=py-bcrypt_11.patch&token=EFCIp9qVR4pi3SaJ7kDaVmy3OQc%3A1346047268712)
+
+florian.ruechel@gmail.com 
+Extending the patch and fixing memset + bzero issues to make the code more standards compliant [patch](http://code.google.com/p/py-bcrypt/issues/attachmentText?id=1&aid=10008000&name=py-bcrypt.patch&token=esLPoSRqwBo90FHQ2B_NOyZbtas%3A1346047268714)
 
 Original README
 ------------
 
-`py-bcrypt` is an implementation the OpenBSD Blowfish password hashing
+__py-bcrypt__ is an implementation the OpenBSD Blowfish password hashing
 algorithm, as described in "A Future-Adaptable Password Scheme" by Niels
 Provos and David Mazieres: http://www.openbsd.org/papers/bcrypt-paper.ps
 
