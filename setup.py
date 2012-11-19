@@ -22,7 +22,7 @@ try:
 except ImportError:
 	from distutils.core import setup, Extension
  
-VERSION = "0.2"
+VERSION = "0.3"
  
 if __name__ == '__main__':
 	bcrypt = Extension('bcrypt._bcrypt',
@@ -30,9 +30,9 @@ if __name__ == '__main__':
 		    'bcrypt/bcrypt.c'])
 	setup(	name = "py-bcrypt",
 		version = VERSION,
-		author = "Damien Miller",
+		author = "Damien Miller, maintained by @wcdolphin",
 		author_email = "djm@mindrot.org",
-		url = "http://www.mindrot.org/py-bcrypt.html",
+		url = "https://github.com/wcdolphin/py-bcrypt",
 		description = "Blowfish password hashing",
 		long_description = """\
 py-bcrypt is an implementation the OpenBSD Blowfish password hashing
