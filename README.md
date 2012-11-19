@@ -6,6 +6,7 @@ This repository is a clone of the [Google Code project](http://code.google.com/p
 Most significantly, this clone applies a number of patches which allows compilation on Windows
 and improves a number of small details in the original implementation, as supplied by the community. The original authors whose patches are included in this author are:
 
+This project has been tested using msvc9, and should be compiled with the same C compiler as the python installation you are using (typically, msvc9)
 If you are having issues compiling on Windows using VC++, fix the msvc9compiler python defaults, and tweak your environment using this [guide](http://blog.victorjabur.com/2011/06/05/compiling-python-2-7-modules-on-windows-32-and-64-using-msvc-2008-express/)
 
 benghattem@gmail.com
