@@ -20,6 +20,7 @@
 typedef unsigned __int8		u_int8_t;
 typedef unsigned __int16	u_int16_t;
 typedef unsigned __int32	u_int32_t;
+#define strdup _strdup /* strdup is not ANSI C. _strdup */
 #endif
 
 /* $Id$ */
@@ -80,9 +81,7 @@ bcrypt_hashpw(PyObject *self, PyObject *args, PyObject *kw_args)
 	ret = pybc_bcrypt(password_copy, salt_copy);
 	Py_END_ALLOW_THREADS;
 
-	memset(password_copy, '\0', strlen(password_copy));
 	free(password_copy);
-	memset(salt_copy, '\0', strlen(salt_copy));
 	free(salt_copy);
 
 	if ((ret == NULL) ||
