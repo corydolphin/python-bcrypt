@@ -5,12 +5,20 @@ Python bcrypt
 
 This repository is a continuation of the [Google Code project](http://code.google.com/p/py-bcrypt/), which has not been updated in more than a year.
 
-Most significantly, this clone applies a number of patches which allows compilation on Windows
-and improves a number of small details in the original implementation, as supplied by the community.
+Most significantly, this clone applies a number of patches which allows compilation for both Python3, and Windows,
+improving a number of small details in the original implementation, as supplied by the community.
 
-If you have any patches, please submit a pull request and I will happily test and accept.
 
-This branch is tested on and compiles under:
+Please submit any issues and updates, I will happily test and accept.
+
+This branch is automatically tested on:
+
+* linux Python 2.6
+* linux Python 2.7
+* linux Python 3.2
+* linux Python 3.3
+
+Manually tested on and compiles under:
 
 #Python 2.7 X86
 * Windows 7 32bit and 64bit  Visual C++ 2012 (MSVC11)
