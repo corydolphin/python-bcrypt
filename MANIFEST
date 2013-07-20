@@ -1,7 +1,6 @@
-README
+README.md
 PKG-INFO
 LICENSE
-ChangeLog
 TODO
 setup.py
 bcrypt/__init__.py

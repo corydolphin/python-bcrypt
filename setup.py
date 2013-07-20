@@ -18,23 +18,22 @@
 
 import sys
 try:
-	from setuptools import setup, Extension
+    from setuptools import setup, Extension
 except ImportError:
-	from distutils.core import setup, Extension
+    from distutils.core import setup, Extension
 
 VERSION = "0.3.1"
 
 if __name__ == '__main__':
-	bcrypt = Extension('bcrypt._bcrypt',
-		sources = ['bcrypt/bcrypt_python.c', 'bcrypt/blowfish.c',
-		    'bcrypt/bcrypt.c'])
-	setup(	name = "py-bcrypt",
-		version = VERSION,
-		author = "Damien Miller, maintained by @wcdolphin",
-		author_email = "djm@mindrot.org",
-		url = "https://github.com/wcdolphin/py-bcrypt",
-		description = "Blowfish password hashing",
-		long_description = """\
+    bcrypt = Extension('bcrypt._bcrypt',
+        sources = ['bcrypt/bcrypt_python.c', 'bcrypt/blowfish.c','bcrypt/bcrypt.c'])
+    setup(name = "python-bcrypt",
+          version = VERSION,
+          author = "Damien Miller, maintained by @wcdolphin",
+          author_email = "djm@mindrot.org",
+          url = "https://github.com/wcdolphin/py-bcrypt",
+          description = "Blowfish password hashing",
+          long_description = """\
 py-bcrypt is an implementation the OpenBSD Blowfish password hashing
 algorithm, as described in "A Future-Adaptable Password Scheme" by
 Niels Provos and David Mazieres.
@@ -44,8 +43,8 @@ Blowfish block cipher with modifications designed to raise the cost
 of off-line password cracking. The computation cost of the algorithm
 is parametised, so it can be increased as computers get faster.
 """,
-		license = "BSD",
+        license = "BSD",
         packages = ['bcrypt'],
         ext_modules = [bcrypt]
-	     )
+         )
 
