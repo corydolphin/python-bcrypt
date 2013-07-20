@@ -17,8 +17,13 @@
 # $Id$
 
 import bcrypt
-
 import unittest
+import sys
+
+PY3 = (sys.version_info >= (3,0))
+
+def enc(s):
+    return s.encode("latin-1") if PY3 else s
 
 test_vectors = [
 	[ '', '$2a$06$DCq7YPn5Rq63x1Lad4cll.',
@@ -61,7 +66,19 @@ test_vectors = [
 	  '$2a$10$LgfYWkbzEvQ4JakH7rOvHe0y8pHKF9OaFgwUZ2q7W2FFZmZzJYlfS' ],
 	[ '~!@#$%^&*()      ~!@#$%^&*()PNBFRD', '$2a$12$WApznUOJfkEGSmYRfnkrPO',
 	  '$2a$12$WApznUOJfkEGSmYRfnkrPOr466oFDCaj4b6HY3EXGvfxm43seyhgC' ],
+    # [ enc('\xa3'), '$2a$05$CCCCCCCCCCCCCCCCCCCCC.', # latin-1 POUND SIGN
+    #   '$2a$05$CCCCCCCCCCCCCCCCCCCCC.BvtRGGx3p8o0C5C36uS442Qqnrwofrq' ],
+    # [ enc('\xc2\xa3'), '$2a$05$CCCCCCCCCCCCCCCCCCCCC.', # utf-8 POUND SIGN
+    #   '$2a$05$CCCCCCCCCCCCCCCCCCCCC.CAzSxlf0FLW7g1A5q7W/ZCj1xsN6A.e' ],
 ]
+
+
+if PY3:
+    # add 8-bit unicode test as well; to verify PY3 encodes it as UTF-8.
+    test_vectors.append(
+        [ '\u00A3', '$2a$05$CCCCCCCCCCCCCCCCCCCCC.', # unicode POUND SIGN
+          '$2a$05$CCCCCCCCCCCCCCCCCCCCC.CAzSxlf0FLW7g1A5q7W/ZCj1xsN6A.e' ],
+    )
 
 class TestRadix(unittest.TestCase):
 	def test_00__test_vectors(self):

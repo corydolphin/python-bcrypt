@@ -23,7 +23,7 @@ cost increases as 2**log_rounds.
 """
 
 import os
-from _bcrypt import *
+from bcrypt._bcrypt import *
 
 def gensalt(log_rounds = 12):
 	"""Generate a random text salt for use with hashpw(). "log_rounds"
