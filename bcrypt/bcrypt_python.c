@@ -55,7 +55,7 @@ bcrypt_encode_salt(PyObject *self, PyObject *args, PyObject *kw_args)
 		PyErr_SetString(PyExc_ValueError, "Invalid number of rounds");
 		return NULL;
 	}
-	encode_salt(ret, csalt, csaltlen, log_rounds);
+    encode_salt(ret, (u_int8_t *) csalt, csaltlen, log_rounds);
 #if PY_MAJOR_VERSION >= 3
     return PyUnicode_FromString(ret);
 #else
@@ -77,7 +77,7 @@ bcrypt_hashpw(PyObject *self, PyObject *args, PyObject *kw_args)
 	int ret;
 	char *password_copy;
 	char *salt_copy;
-	if (!PyArg_ParseTupleAndKeywords(args, kw_args, "ss:hashpw", keywords,
+    if (!PyArg_ParseTupleAndKeywords(args, kw_args, "ss:hashpw", keywords,
 	    &password, &salt))
                 return NULL;
 
