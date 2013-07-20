@@ -1,7 +1,8 @@
 Python bcrypt
 ============
 
-Testing Travis CI
+[![Build Status](https://travis-ci.org/wcdolphin/py-bcrypt.png?branch=master)](https://travis-ci.org/wcdolphin/py-bcrypt)
+
 This repository is a continuation of the [Google Code project](http://code.google.com/p/py-bcrypt/), which has not been updated in more than a year.
 
 Most significantly, this clone applies a number of patches which allows compilation on Windows
