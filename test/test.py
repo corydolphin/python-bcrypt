@@ -17,6 +17,7 @@
 # $Id$
 
 import bcrypt
+
 import unittest
 
 test_vectors = [

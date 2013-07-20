@@ -26,7 +26,7 @@ typedef unsigned __int32	u_int32_t;
 /* $Id$ */
 
 /* Import */
-char *pybc_bcrypt(const char *, const char *);
+int pybc_bcrypt(const char *, const char *, char *, size_t);
 void encode_salt(char *, u_int8_t *, u_int16_t, u_int8_t);
 
 PyDoc_STRVAR(bcrypt_encode_salt_doc,
@@ -67,9 +67,11 @@ static PyObject *
 bcrypt_hashpw(PyObject *self, PyObject *args, PyObject *kw_args)
 {
 	static char *keywords[] = { "password", "salt", NULL };
-	char *password = NULL, *salt = NULL, *password_copy = NULL, *salt_copy = NULL;
- 	char *ret;
-
+	char *password = NULL, *salt = NULL;
+	char hashed[128];
+	int ret;
+	char *password_copy;
+	char *salt_copy;
 	if (!PyArg_ParseTupleAndKeywords(args, kw_args, "ss:hashpw", keywords,
 	    &password, &salt))
                 return NULL;
@@ -78,19 +80,21 @@ bcrypt_hashpw(PyObject *self, PyObject *args, PyObject *kw_args)
 	salt_copy = strdup(salt);
 
 	Py_BEGIN_ALLOW_THREADS;
-	ret = pybc_bcrypt(password_copy, salt_copy);
+	ret = pybc_bcrypt(password_copy, salt_copy, hashed, sizeof(hashed));
 	Py_END_ALLOW_THREADS;
 
+	memset(password_copy, 0, strlen(password_copy));
 	free(password_copy);
+
+	memset(salt_copy, 0, strlen(salt_copy));
 	free(salt_copy);
 
-	if ((ret == NULL) ||
-	    strcmp(ret, ":") == 0) {
+	if (ret != 0 || strcmp(hashed, ":") == 0) {
 		PyErr_SetString(PyExc_ValueError, "Invalid salt");
 		return NULL;
 	}
 
-	return PyString_FromString(ret);
+	return PyString_FromString(hashed);
 }
 
 static PyMethodDef bcrypt_methods[] = {
@@ -109,6 +113,6 @@ init_bcrypt(void)
 	PyObject *m;
 
 	m = Py_InitModule3("bcrypt._bcrypt", bcrypt_methods, module_doc);
-	PyModule_AddStringConstant(m, "__version__", "0.1");
+	PyModule_AddStringConstant(m, "__version__", "0.3.1");
 }
 

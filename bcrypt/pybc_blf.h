@@ -36,9 +36,9 @@
 
 #if defined(_WIN32)
 #define snprintf _snprintf
-typedef unsigned __int8		u_int8_t;
-typedef unsigned __int16	u_int16_t;
-typedef unsigned __int32	u_int32_t;
+typedef unsigned __int8     u_int8_t;
+typedef unsigned __int16    u_int16_t;
+typedef unsigned __int32    u_int32_t;
 #endif
 
 /* Schneier specifies a maximum key length of 56 bytes.
@@ -48,19 +48,19 @@ typedef unsigned __int32	u_int32_t;
  * of the key affect all cipherbits.
  */
 
-#define BLF_N	16			/* Number of Subkeys */
-#define BLF_MAXKEYLEN ((BLF_N-2)*4)	/* 448 bits */
+#define BLF_N   16          /* Number of Subkeys */
+#define BLF_MAXKEYLEN ((BLF_N-2)*4) /* 448 bits */
 
 /* Blowfish context */
 typedef struct BlowfishContext {
-	u_int32_t S[4][256];	/* S-Boxes */
-	u_int32_t P[BLF_N + 2];	/* Subkeys */
+    u_int32_t S[4][256];    /* S-Boxes */
+    u_int32_t P[BLF_N + 2]; /* Subkeys */
 } pybc_blf_ctx;
 
 /* Raw access to customized Blowfish
- *	blf_key is just:
- *	Blowfish_initstate( state )
- *	Blowfish_expand0state( state, key, keylen )
+ *  blf_key is just:
+ *  Blowfish_initstate( state )
+ *  Blowfish_expand0state( state, key, keylen )
  */
 
 void pybc_Blowfish_initstate(pybc_blf_ctx *);

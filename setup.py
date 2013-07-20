@@ -21,9 +21,9 @@ try:
 	from setuptools import setup, Extension
 except ImportError:
 	from distutils.core import setup, Extension
- 
-VERSION = "0.3"
- 
+
+VERSION = "0.3.1"
+
 if __name__ == '__main__':
 	bcrypt = Extension('bcrypt._bcrypt',
 		sources = ['bcrypt/bcrypt_python.c', 'bcrypt/blowfish.c',
@@ -36,16 +36,16 @@ if __name__ == '__main__':
 		description = "Blowfish password hashing",
 		long_description = """\
 py-bcrypt is an implementation the OpenBSD Blowfish password hashing
-algorithm, as described in "A Future-Adaptable Password Scheme" by 
+algorithm, as described in "A Future-Adaptable Password Scheme" by
 Niels Provos and David Mazieres.
 
 This system hashes passwords using a version of Bruce Schneier's
 Blowfish block cipher with modifications designed to raise the cost
-of off-line password cracking. The computation cost of the algorithm 
+of off-line password cracking. The computation cost of the algorithm
 is parametised, so it can be increased as computers get faster.
 """,
 		license = "BSD",
-		packages = ['bcrypt'],
-		ext_modules = [bcrypt]
+        packages = ['bcrypt'],
+        ext_modules = [bcrypt]
 	     )
 
