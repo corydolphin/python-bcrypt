@@ -13,8 +13,10 @@
  * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
-
+#define PY_SSIZE_T_CLEAN
 #include "Python.h"
+
+#define PYBCRYPT_VERSION "0.4"
 
 #if defined(_WIN32)
 typedef unsigned __int8		u_int8_t;
@@ -23,7 +25,6 @@ typedef unsigned __int32	u_int32_t;
 #define strdup _strdup /* strdup is not ANSI C. _strdup */
 #endif
 
-/* $Id$ */
 
 /* Import */
 int pybc_bcrypt(const char *, const char *, char *, size_t);
@@ -39,7 +40,7 @@ bcrypt_encode_salt(PyObject *self, PyObject *args, PyObject *kw_args)
 {
 	static char *keywords[] = { "csalt", "log_rounds", NULL };
 	char *csalt = NULL;
-	int csaltlen = -1;
+    Py_ssize_t csaltlen = -1;
 	long log_rounds = -1;
 	char ret[64];
 
@@ -55,7 +56,11 @@ bcrypt_encode_salt(PyObject *self, PyObject *args, PyObject *kw_args)
 		return NULL;
 	}
 	encode_salt(ret, csalt, csaltlen, log_rounds);
-	return PyString_FromString(ret);
+#if PY_MAJOR_VERSION >= 3
+    return PyUnicode_FromString(ret);
+#else
+    return PyString_FromString(ret);
+#endif
 }
 
 PyDoc_STRVAR(bcrypt_hashpw_doc,
@@ -93,8 +98,11 @@ bcrypt_hashpw(PyObject *self, PyObject *args, PyObject *kw_args)
 		PyErr_SetString(PyExc_ValueError, "Invalid salt");
 		return NULL;
 	}
-
+#if PY_MAJOR_VERSION >= 3
+    return PyUnicode_FromString(hashed);
+#else
 	return PyString_FromString(hashed);
+#endif
 }
 
 static PyMethodDef bcrypt_methods[] = {
@@ -107,12 +115,38 @@ static PyMethodDef bcrypt_methods[] = {
 
 PyDoc_STRVAR(module_doc, "Internal module used by bcrypt.\n");
 
-PyMODINIT_FUNC
-init_bcrypt(void)
-{
-	PyObject *m;
+#if PY_MAJOR_VERSION >= 3
+    static struct PyModuleDef bcrypt_module = {
+        PyModuleDef_HEAD_INIT,
+        "bcrypt._bcrypt",    /* m_name */
+        module_doc,          /* m_doc */
+        -1,                  /* m_size */
+        bcrypt_methods,      /* m_methods */
+        NULL,                /* m_reload */
+        NULL,                /* m_traverse */
+        NULL,                /* m_clear */
+        NULL,                /* m_free */
+    };
 
-	m = Py_InitModule3("bcrypt._bcrypt", bcrypt_methods, module_doc);
-	PyModule_AddStringConstant(m, "__version__", "0.3.1");
-}
+    PyMODINIT_FUNC
+    PyInit__bcrypt(void)
+    {
+        PyObject *m;
 
+        m = PyModule_Create(&bcrypt_module);
+        PyModule_AddStringConstant(m, "__version__", PYBCRYPT_VERSION);
+        return m;
+    }
+
+#else
+
+
+    PyMODINIT_FUNC
+    init_bcrypt(void)
+    {
+        PyObject *m;
+
+        m = Py_InitModule3("bcrypt._bcrypt", bcrypt_methods, module_doc);
+        PyModule_AddStringConstant(m, "__version__", PYBCRYPT_VERSION);
+    }
+#endif
