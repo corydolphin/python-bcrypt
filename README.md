@@ -1,7 +1,7 @@
-Python bcrypt
+Python BCrypt
 ============
 
-[![Build Status](https://travis-ci.org/wcdolphin/py-bcrypt.png?branch=master)](https://travis-ci.org/wcdolphin/py-bcrypt)
+[![Build Status](https://travis-ci.org/wcdolphin/python-bcrypt.png?branch=master)](https://travis-ci.org/wcdolphin/py-bcrypt)
 
 
 An up to date fork of py-bcrypt, Python 3 and Python 2 compatible, compiles on Windows, Mac, Linux.

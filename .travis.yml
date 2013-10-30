@@ -8,5 +8,4 @@ install:
     - python setup.py install
 script:
     - python test/test.py
-    - pip install python-bcrypt
 
