@@ -27,7 +27,7 @@ VERSION = "0.3.1"
 if __name__ == '__main__':
     bcrypt = Extension('bcrypt._bcrypt',
         sources = ['bcrypt/bcrypt_python.c', 'bcrypt/blowfish.c','bcrypt/bcrypt.c'],
-        extra_compile_args=['-Wunused-command-line-argument-hard-error-in-future'])
+        extra_compile_args=['-Wno-error=unused-command-line-argument-hard-error-in-future'])
     setup(name = "python-bcrypt",
           version = VERSION,
           author = "Damien Miller, maintained by @wcdolphin",
