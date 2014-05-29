@@ -1,4 +1,11 @@
-Python BCrypt
+OUTDATED
+===========
+The Google Code project has seen a revival including a number of important updates. I do not have time to manage maintaining compatibility and integrating the improvements. I believe the Google Code project now addresses most of the issues this project solved, please see [Google Code project](http://code.google.com/p/py-bcrypt/).
+
+
+
+
+Python BCrypt (Old out of date README as of 2014)
 ============
 
 [![Build Status](https://travis-ci.org/wcdolphin/python-bcrypt.png?branch=master)](https://travis-ci.org/wcdolphin/py-bcrypt)
